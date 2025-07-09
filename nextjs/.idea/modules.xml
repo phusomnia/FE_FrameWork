@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../PersonalProject/NextDex_V1/NextDexAPI/NextDexAPI.iml" filepath="$PROJECT_DIR$/../../PersonalProject/NextDex_V1/NextDexAPI/NextDexAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../PersonalProject/NextDex_V1/nextdex/nextdex.iml" filepath="$PROJECT_DIR$/../../PersonalProject/NextDex_V1/nextdex/nextdex.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/nextjs.iml" filepath="$PROJECT_DIR$/.idea/nextjs.iml" />
+    </modules>
+  </component>
+</project>
