@@ -13,10 +13,15 @@
     "@prisma/client": "^6.11.0",
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-query": "^5.81.5",
-    "astro": "^5.10.2",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "astro": "^5.10.1",
     "astro-pages": "^0.3.1",
     "lucide-react": "^0.525.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "swiper": "^11.2.10",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "zustand": "^5.0.7"
   }
 }
