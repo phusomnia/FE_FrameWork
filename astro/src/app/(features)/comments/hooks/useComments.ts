@@ -1,4 +1,4 @@
-import { queryClient, useMutation, useQuery } from "@/store/queryStore";
+import { queryClient, useMutation, useQuery } from "@/store/QueryStore";
 
 export function getCommnets() {
     return useQuery({

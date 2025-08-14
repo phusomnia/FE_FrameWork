@@ -1,6 +1,7 @@
 import React from "react";
-import { getCommnets,  usePostComment, useDeleteComment, useEditComment } from "@/features/todo/hooks/useComments";
-import { useCounterStore } from "@/store/counterStore";
+import { getCommnets,  usePostComment, useDeleteComment, useEditComment } from "@/app/(features)/comments/hooks/useComments";
+import { useCounterStore } from "@/store/CounterStore";
+import CustomButton from "../component/CustomButton";
 
 export function Comments() {
     const { data, isLoading } = getCommnets();
@@ -39,10 +40,10 @@ export function Comments() {
         </div>
         <div>
             <h1>Count: {count}</h1>
-            <button onClick={increment}>Increment</button>
-            <button onClick={decrement}>Decrement</button>
-            <button onClick={reset}>Reset</button>
-            <button onClick={() => setCount(42)}>Set to 42</button>
+            <CustomButton color="red" onClick={increment}>+</CustomButton>
+            <CustomButton color="blue" onClick={decrement}>-</CustomButton>
+            <CustomButton color="green" onClick={reset}>Reset</CustomButton>
+            <CustomButton color="yellow" onClick={() => setCount(10)}>Reset</CustomButton>
         </div>
     </>
 }
