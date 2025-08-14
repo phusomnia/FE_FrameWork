@@ -1,19 +1,30 @@
 import React from "react";
-import { getCommnets,  usePostComment, useDeleteComment, useEditComment } from "@/app/(features)/comments/hooks/useComments";
+import { getCommnets,  usePostComment, useDeleteComment, useEditComment } from "@/app/(features)/comments/api/useComments";
 import { useCounterStore } from "@/store/CounterStore";
 import CustomButton from "../component/CustomButton";
+import { useToggle } from "@/hooks/useToggle";
+import { useForm } from "@/hooks/useForm";
+
+type CommentProps = {
+    comment?: string
+    username?: string
+}
 
 export function Comments() {
     const { data, isLoading } = getCommnets();
     const postComment = usePostComment();
     const { count, increment, decrement, reset, setCount } = useCounterStore();
+    const [edit, toggleEdit] = useToggle();
+
+    const formValues: CommentProps = { comment: '' }  
+    const { value, handleChange } = useForm(formValues);
 
     if(isLoading)
     {
         return <div>Loading...</div>
     }
-
     console.log(data);
+    console.log(value)
 
     const handlePostComment = ((e: any) => {
         if (e.key === 'Enter') {
@@ -33,9 +44,11 @@ export function Comments() {
         </div>
         <div>
             <input 
+                name="comment"
                 type="text" 
                 placeholder="Add comment" 
-                onKeyDown={handlePostComment} 
+                onChange={handleChange}
+                onKeyDown={handlePostComment}
             />
         </div>
         <div>
@@ -45,16 +58,17 @@ export function Comments() {
             <CustomButton color="green" onClick={reset}>Reset</CustomButton>
             <CustomButton color="yellow" onClick={() => setCount(10)}>Reset</CustomButton>
         </div>
+        {edit && <div>Editing</div>}
+        <button onClick={toggleEdit}>Toggle</button>
     </>
 }
 
 export default function Comment({comment}: any)
 {
-    const [edit, setEdit] = React.useState(false);
+    const [edit, setEdit] = useToggle();
     const [text, setText] = React.useState("");
     const deleteComment = useDeleteComment();
     const editComment = useEditComment();
-    console.log(text)
 
     const handleEditComment = () => {
         console.log('Enter key pressed');
@@ -64,10 +78,9 @@ export default function Comment({comment}: any)
         })
     };
 
-    const render = (comment: any, edit: boolean) => {
-        if(edit)
-        {
-            return <>
+    return <>
+        <div key={comment.id}>
+            {edit ? <>
                 <input type="text" 
                     onChange={(e) => setText(e.target.value)}
                 />
@@ -77,23 +90,16 @@ export default function Comment({comment}: any)
                         setEdit(!edit)
                         handleEditComment()
                     }}>Save</button>
-            </>
-        }
-        return <>
-            {comment.body}
-            <button
+            </> : <>
+                {comment.body}
+                <button
+                    className="px-1" 
+                    onClick={() => setEdit(!edit)}>Edit</button>
+                <button
+                    onClick={() => deleteComment.mutate(comment.id)}
                 className="px-1" 
-                onClick={() => setEdit(!edit)}>Edit</button>
-            <button
-                onClick={() => deleteComment.mutate(comment.id)}
-            className="px-1" 
-            >Delete</button>
-        </>
-    }
-
-    return <>
-        <div key={comment.id}>
-            {render(comment, edit)}
+                >Delete</button>
+            </>}
         </div>
     </>
 }

@@ -6,7 +6,7 @@ export default function CommentsLayout() {
     console.log("MainLayout");
     return <>
         <ContextProvider>
-            <Comments />
+            <Comments/>
         </ContextProvider>
     </>
 }
