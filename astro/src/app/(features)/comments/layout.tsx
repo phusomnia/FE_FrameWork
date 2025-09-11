@@ -1,12 +1,11 @@
 import React from "react";
-import { Comments } from "./pages/Comments";
+import { CommentsComponent } from "./pages/CommentsComponent.tsx";
 import ContextProvider from '@/layouts/ContextProvider';
 
 export default function CommentsLayout() {
-    console.log("MainLayout");
     return <>
         <ContextProvider>
-            <Comments/>
+            <CommentsComponent/>
         </ContextProvider>
     </>
 }

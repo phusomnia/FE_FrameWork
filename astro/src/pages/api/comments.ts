@@ -11,7 +11,14 @@ import path from "path";
     You can use SQL lib or ORM like Prisma, Drizzle to handle the database
 */
 
+const getFilePath = (dir: string) => {
+    const currentFilePath = new URL(import.meta.url).pathname
+    const correctedPath = currentFilePath.replace(/^\/([a-zA-Z]):/, '$1:');
+    return path.join(correctedPath, dir);
+}
+
 export const GET: APIRoute = async ({params, request}) => {
+    console.log(getFilePath("../data.json"))
     return new Response(
         JSON.stringify(data), 
         {status: 200}
@@ -21,8 +28,8 @@ export const GET: APIRoute = async ({params, request}) => {
 export const POST: APIRoute = async ({request}) => {
     const newComment = await request.json();
 
-    const currentFilePath = path.join(new URL(import.meta.url).pathname, "../data.json")
-    const file = await fs.readFile(path.join(currentFilePath), "utf-8");
+    const currentFilePath = getFilePath("../data.json")
+    const file = await fs.readFile(currentFilePath, "utf-8");
     const comments = JSON.parse(file);
     console.log(comments);
 
@@ -41,8 +48,8 @@ export const PUT: APIRoute = async ({request}) => {
     const req = await request.json();
     console.log(req)
 
-    const currentFilePath = path.join(new URL(import.meta.url).pathname, "../data.json")
-    const file = await fs.readFile(path.join(currentFilePath), "utf-8");
+    const currentFilePath = getFilePath("../data.json")
+    const file = await fs.readFile(currentFilePath, "utf-8");
     const comments = JSON.parse(file);
     console.log(comments);
 
@@ -63,11 +70,11 @@ export const PUT: APIRoute = async ({request}) => {
 }
 
 export const DELETE: APIRoute = async ({request}) => {
-    const id = Number(new URL(request.url).searchParams.get("id"));
+    const id = new URL(request.url).searchParams.get("id");
     console.log(typeof id)
 
-    const currentFilePath = path.join(new URL(import.meta.url).pathname, "../data.json")
-    const file = await fs.readFile(path.join(currentFilePath), "utf-8");
+    const currentFilePath = getFilePath("../data.json")
+    const file = await fs.readFile(currentFilePath, "utf-8");
     const comments = JSON.parse(file);
 
     const exist = comments.find((comment: any) => comment.id === id);
