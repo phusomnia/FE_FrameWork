@@ -1,7 +1,7 @@
 import React from "react"
 
 type Rule = 
-    | { required   : string }
+    | { required  : string }
     | { pattern   : RegExp; message: string }
     | { minLength : number; message: string }
     | { maxLength : number; message: string };
@@ -33,10 +33,11 @@ export function useForm<T extends Record<string, any>>(
     const validateField = (name: string, fieldValue: any): string | undefined => {
         const config = fieldConfigs.current[name];
         
-        if (!config?.rules) return
+        if (!config?.rules) return;
         
         for (const rule of config.rules)
         {
+            console.log(rule)
             if ("required" in rule && !fieldValue)
             {
                 return rule.required;
@@ -53,8 +54,9 @@ export function useForm<T extends Record<string, any>>(
             {
                 return rule.message;
             }
-            return undefined;
         }
+        
+        return undefined;
     }
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

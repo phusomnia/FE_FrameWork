@@ -1,11 +1,11 @@
 import React from "react";
-import { CommentsComponent } from "./pages/CommentsComponent.tsx";
 import QueryProvider from '@/layouts/QueryProvider';
+import {LoginForm} from "@/app/(features)/(auth)/login/pages/Login.tsx";
 
-export default function CommentsLayout() {
+export default function LoginLayout() {
     return <>
         <QueryProvider>
-            <CommentsComponent/>
+            <LoginForm/>
         </QueryProvider>
     </>
 }

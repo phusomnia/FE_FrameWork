@@ -12,7 +12,16 @@ export default defineConfig({
         port: 1337
     },
     vite: {
-        plugins: [tailwindcss()]
+        plugins: [tailwindcss()],
+        server: {
+            proxy: {
+                "/api": {
+                    target: "http://localhost:8080",
+                    changeOrigin: true,
+                    secure: false
+                },
+            },
+        },
     },
     output: "server",
     integrations: [
