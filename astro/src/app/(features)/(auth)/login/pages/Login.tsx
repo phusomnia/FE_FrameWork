@@ -23,15 +23,12 @@ export function LoginForm()
 
     const login = useLogin();
 
-    const { data: userdetail, error, isError, isSuccess }: any = login;
+    const { data: userdetail, isPending, isSuccess }: any = login;
     
-    if(isError)
-    {
-        alert("Sth wrong")
-    }
+    console.log(isSuccess, userdetail)
+    if (isPending) return <div>...</div>
     
     const onSubmit = (values: any) => {
-        console.log(values)
         login.mutate({
             username: values.username,
             password: values.password
