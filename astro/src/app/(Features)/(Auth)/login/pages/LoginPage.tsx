@@ -1,38 +1,27 @@
-import { useForm } from "@/hooks/useForm.ts";
-import { useLogin } from "../api/useAuth.ts" 
+import { useForm } from "@/Hooks/useForm.ts";
+import {useAuthorize, useLogin} from "../api/useAuth.ts" 
+import { fieldConfigs } from "@/Config/ValidationConfigs.ts";
+import {useNavigate} from "react-router";
 import React from "react";
-import {DatabaseIcon} from "lucide-react";
 
-const fieldConfigs = {
-    username: {
-        rules: [{ required: "username is required" }]
-    },
-    password: {
-        rules: [
-            { required: "username is required" }
-        ]
-    }
-}
-
-export function LoginForm()
+export function LoginPage()
 {
     const form = useForm({
         username: "",
         password: ""
-    }, fieldConfigs)
+    }, fieldConfigs.login)
 
     const login = useLogin();
-
-    const { data: userdetail, isPending, isSuccess }: any = login;
+    const { isPending: loginPending } = login;
     
-    console.log(isSuccess, userdetail)
-    if (isPending) return <div>...</div>
+    if (loginPending) return <div>Login...</div>
     
-    const onSubmit = (values: any) => {
-        login.mutate({
+    const onSubmit = async (values: any) => {
+        await login.mutateAsync({
             username: values.username,
             password: values.password
         })
+        window.location.href = "/dashboard";
     };
     
     return <>

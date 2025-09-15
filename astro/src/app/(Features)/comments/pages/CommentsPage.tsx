@@ -1,9 +1,14 @@
 import React from "react";
-import { getCommnets, usePostComment, useDeleteComment, useEditComment} from "@/app/(features)/comments/api/useComments";
+import {
+    usePostComment,
+    useDeleteComment,
+    useEditComment,
+    getComments
+} from "@/app/(Features)/comments/api/useComments";
 import { usePageView } from "@/store/Counter/CounterStore";
 import CustomButton from "../component/CustomButton";
-import { useToggle } from "@/hooks/useToggle";
-import { useForm } from "@/hooks/useForm";
+import { useToggle } from "@/Hooks/useToggle";
+import { useForm } from "@/Hooks/useForm";
 
 const fieldConfigs = {
     comment: {
@@ -11,8 +16,8 @@ const fieldConfigs = {
     }
 }
 
-export function CommentsComponent() {
-    const {data, isLoading} = getCommnets();
+export function CommentsPage() {
+    const {data, isLoading} = getComments();
     const postComment = usePostComment();
     
     // -- store --

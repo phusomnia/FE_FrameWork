@@ -4,10 +4,12 @@ import fs from "fs/promises";
 import path from "path";
 
 /*
+    This is a dynamic route like NEXTJS
+
     This is a demo of API routes in Astro
     demonstrating the use of the GET, POST, PUT and DELETE methods
     in case you want to develop fullstack apps
-
+    
     You can use SQL lib or ORM like Prisma, Drizzle to handle the database
 */
 

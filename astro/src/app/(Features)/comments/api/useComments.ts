@@ -1,6 +1,6 @@
 import { queryClient, useMutation, useQuery } from "@/store/QueryStore";
 
-export function getCommnets() {
+export function getComments() {
     return useQuery({
         queryKey: ['todos'],
         queryFn: async () => { 
