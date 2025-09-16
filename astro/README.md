@@ -18,8 +18,23 @@ Inside of your Astro project, you'll see the following folders and files:
 /
 ├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
+├── app/
+│   ├── (Features)
+│   config
+│   ├──
+│   hooks
+│   ├──
+│   layouts
+│   ├──
+│   middleware
+│   ├──
+│   pages
+│   ├──
+│   store
+│   │
+│   styles
+│   │
+│   utils
 └── package.json
 ```
 
