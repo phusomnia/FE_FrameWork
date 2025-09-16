@@ -1,5 +1,5 @@
 import { queryClient, useMutation, useQuery } from "@/store/QueryStore.ts";
-import type {AuthProvider, AuthRequest} from "@/app/(Features)/(Auth)/dashboard/types.ts";
+import type {AuthRequest} from "@/app/(Features)/(Auth)/dashboard/types.ts";
 
 function useLogin()
 {
@@ -61,10 +61,12 @@ function useAuthorize()
             return res
         } ,
         onSuccess: (res: any) => {
-            console.log(res)
+            console.log(res);
+            return res;
         },
         onError: (err: any) => {
-            console.error(err)
+            console.log(err);
+            return err;
         }
     })
 }

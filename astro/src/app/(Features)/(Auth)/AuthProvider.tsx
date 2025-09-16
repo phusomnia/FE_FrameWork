@@ -5,28 +5,28 @@ import type {AuthProviderProps} from "@/app/(Features)/(Auth)/dashboard/types.ts
 export default function AuthProvider({ roleAllowed, url, children }: AuthProviderProps) {
     const auth = useAuthorize();
     const token = localStorage.getItem("access-token");
-
-
-    const { isError } = auth;
-
-    React.useEffect(() => {
-        if (token) {
-            auth.mutate({
-                token: token,
-                roleAllowed: roleAllowed,
-                url: url
-            });
-        }
-    }, [token, roleAllowed, url]);
-
+    const { isError, isPending } = auth;
 
     if (!token) {
         return <div>No token found</div>;
     }
 
-    if (isError) {
-        return <div>Not authorized</div>
-    }
+    React.useEffect(() => {
+        const authorize = async () => {
+            await auth.mutateAsync({
+                token: token,
+                roleAllowed: roleAllowed,
+                url: url
+            });
+        };
+
+        if (token) {
+            authorize()
+        }
+    }, [token]);
+
+    if (isPending) return <div>...</div>
+    if (isError) return <div className="text-red-500">Not authorized</div>
     
     return <>{children}</>;
 }

@@ -13,7 +13,6 @@ export function LoginPage()
 
     const login = useLogin();
     const { isPending: loginPending } = login;
-    
     if (loginPending) return <div>Login...</div>
     
     const onSubmit = async (values: any) => {
@@ -23,6 +22,7 @@ export function LoginPage()
         })
         window.location.href = "/dashboard";
     };
+    
     
     return <>
         <form onSubmit={form.handleSubmit(onSubmit)}>
